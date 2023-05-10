@@ -96,19 +96,15 @@ class _AnimationTestScreenState extends State<AnimationTestScreen>
               height: 30,
             ),
             AnimatedBuilder(
-                animation: midBoxOffsetAnimation,
+                animation: Listenable.merge([midBoxOffsetAnimation,midBoxOpacityAnimation]),
                 builder: (context, child) {
-                  return AnimatedBuilder(
-                      animation: midBoxOpacityAnimation,
-                      builder: (context, child) {
-                        return Transform.translate(
-                          offset: midBoxOffsetAnimation.value,
-                          child: Opacity(
-                            opacity: midBoxOpacityAnimation.value,
-                            child: const SecondBox(),
-                          ),
-                        );
-                      });
+                  return Transform.translate(
+                    offset: midBoxOffsetAnimation.value,
+                    child: Opacity(
+                      opacity: midBoxOpacityAnimation.value,
+                      child: const SecondBox(),
+                    ),
+                  );
                 }),
             const SizedBox(
               height: 30,
